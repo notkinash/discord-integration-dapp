@@ -1,0 +1,26 @@
+{
+	"name": "web3-verification-app",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next link",
+		"marketplace": "npx create-web3-dapp marketplace"
+	},
+	"dependencies": {
+		"@rainbow-me/rainbowkit": "^0.8.1",
+		"alchemy-sdk": "^2.3.0",
+		"ethers": "^5.7.2",
+		"next": "13.1.2",
+		"next-auth": "^4.19.2",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-toastify": "^9.1.1"
+	},
+	"devDependencies": {
+		"eslint": "8.20.0",
+		"eslint-config-next": "12.2.3"
+	}
+}
