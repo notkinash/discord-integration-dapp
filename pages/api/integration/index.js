@@ -9,7 +9,6 @@ export default async function handle(req, res) {
         const result1 = await prisma.user.findFirst({
             where: {
                 discord: discord,
-                address: address,
             },
         });
 
@@ -17,7 +16,6 @@ export default async function handle(req, res) {
             await prisma.user.deleteMany({
                 where: {
                     discord: discord,
-                    address: address,
                 },
             });
         }
