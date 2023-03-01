@@ -9,6 +9,8 @@ export default function DiscordComponent() {
     const { data: session } = useSession();
     const { address, isConnected } = useAccount();
     const [ subtitle, setSubtitle ] = useState("");
+    const [ integrationText, setIntegrationText ] = useState("Integrate with Discord");
+    const [ synchronized, setSynchronized ] = useState(false);
     
     const { isLoading, signMessage } = useSignMessage({
         onSuccess(data, variables) {
@@ -24,9 +26,13 @@ export default function DiscordComponent() {
                     headers: {
                         "content-type": "application/json"
                     }
-                }).then(console.log).catch((e) => console.error);
+                }).then(console.log).catch((e) => console.error(e));
 
-                toast.success('Signature validated!', {
+                let toastText = 'Signature validated!';
+
+                toastText = synchronized ? toastText + '\nAddress updated!' : toastText;
+
+                toast.success(toastText, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -46,6 +52,29 @@ export default function DiscordComponent() {
             : "You must connect your wallet and Discord to proceed";
         
         setSubtitle(newSubtitle);
+
+        if (!synchronized && session) {
+            fetch(`http://localhost:3000/api/integration/${session.user.id}`, { method: "GET" })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.address) {
+                    setSynchronized(true);
+                    setIntegrationText("Update Address");
+
+                    toast.info('Looks like you already synchronized your wallet address!', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        toastId: "synchronized",
+                    });
+                }
+            });
+        }
     }, [isConnected, session]);
 
     return (
@@ -66,7 +95,7 @@ export default function DiscordComponent() {
                             }}
                         >
                             <div className={styles.button}>
-                                <p>Integrate with Discord</p>
+                                <p>{integrationText}</p>
                             </div>
                         </a>
                     )}

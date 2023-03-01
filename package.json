@@ -13,9 +13,11 @@
 		"@prisma/client": "^4.11.0",
 		"@rainbow-me/rainbowkit": "^0.8.1",
 		"alchemy-sdk": "^2.3.0",
+		"discord-interactions": "^3.3.0",
 		"ethers": "^5.7.2",
 		"next": "13.1.2",
 		"next-auth": "^4.19.2",
+		"node-fetch": "^3.3.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-toastify": "^9.1.1"
