@@ -86,6 +86,13 @@ export default async function handler(req, res) {
                     },
                 });
             }
+
+            return res.send({
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data: {
+                    content: "Sorry! You have no address synchronized with your account! Access: https://localhost:3000/",
+                },
+            });
         }
     }
 }
