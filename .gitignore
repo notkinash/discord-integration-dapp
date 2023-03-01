@@ -2,3 +2,6 @@
 /.next/
 
 .env.local
+.env
+
+/prisma/migrations/

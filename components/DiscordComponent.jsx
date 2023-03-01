@@ -14,6 +14,18 @@ export default function DiscordComponent() {
         onSuccess(data, variables) {
             const recoveredAddress = verifyMessage(variables.message, data);
             if (recoveredAddress === address) {
+                fetch("http://localhost:3000/api/integration", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        discord: session.user.id,
+                        address: address,
+                        signature: data,
+                    }),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }).then(console.log).catch((e) => console.error);
+
                 toast.success('Signature validated!', {
                     position: "top-right",
                     autoClose: 5000,
@@ -31,7 +43,7 @@ export default function DiscordComponent() {
     useEffect(() => {
         const newSubtitle = isConnected && session
             ? `Welcome, <b>${session.user.name}</b>! Click the button below:`
-            : "You must connect your wallet to proceed";
+            : "You must connect your wallet and Discord to proceed";
         
         setSubtitle(newSubtitle);
     }, [isConnected, session]);
@@ -68,7 +80,7 @@ export default function DiscordComponent() {
                                 width={"20px"}
                                 height={"20px"}
                             />
-                            <p>Logout Discord</p>
+                            <p>Disconnect</p>
                         </div>
                     </a> 
                 </div>
@@ -84,7 +96,7 @@ export default function DiscordComponent() {
                                 width={"20px"}
                                 height={"20px"}
                             />
-                            <p>Login Discord</p>
+                            <p>Connect</p>
                         </div>
                     </a>
                 </div>
