@@ -1,5 +1,5 @@
 # discord-integration-dapp
-A Descentralized App + Discord Bot to integrate your wallet address and Discord account (multi-chain) using create-web3-dapp
+A Descentralized App + Discord Bot to integrate your wallet address and Discord account (multi-chain) using [create-web3-dapp](https://github.com/alchemyplatform/create-web3-dapp)
 
 ## Getting started
 Copy `.env.local.example` to `.env.local`:
